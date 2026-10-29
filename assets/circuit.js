@@ -3,97 +3,139 @@
   var canvas = document.getElementById("circuit-field");
   if (!canvas || !canvas.getContext) return;
   var ctx;
-  try { ctx = canvas.getContext("2d"); } catch (error) { return; }
+  try { ctx = canvas.getContext("2d", { alpha: true }); } catch (err) { return; }
   if (!ctx) return;
 
-  var motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
-  var reducedMotion = !!(motionQuery && motionQuery.matches);
+  var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  var reduced = !!(mq && mq.matches);
   var saveData = !!(navigator.connection && navigator.connection.saveData);
-  var nodes = [];
-  var width = 1, height = 1, running = false, frame = 0, last = 0;
-  var fpsInterval = 1000 / 20;
-  var raf = window.requestAnimationFrame ? function(cb) { return window.requestAnimationFrame(cb); } : null;
-  var cancel = window.cancelAnimationFrame ? function(id) { window.cancelAnimationFrame(id); } : null;
-  var lastSize = "";
+  var raf = window.requestAnimationFrame ? function (fn) { return window.requestAnimationFrame(fn); } : null;
+  var caf = window.cancelAnimationFrame ? function (id) { window.cancelAnimationFrame(id); } : null;
+  var width = 1, height = 1, scale = 1, nodes = [], running = false, frame = 0, last = 0;
+  var mouse = { x: -1000, y: -1000, seen: -99999 };
+  var isCoarse = window.matchMedia ? window.matchMedia("(pointer: coarse)").matches : false;
+  var fps = isCoarse ? 18 : 24, interval = 1000 / fps;
 
-  function random(min, max) { return min + Math.random() * (max - min); }
+  function between(a, b) { return a + Math.random() * (b - a); }
   function resize() {
-    var rect = canvas.getBoundingClientRect();
-    var w = Math.max(1, Math.round(Math.min(rect.width, 1150)));
-    var h = Math.max(1, Math.round(Math.min(rect.height, 650)));
-    var size = w + "x" + h;
-    if (size === lastSize) return;
-    lastSize = size; width = w; height = h;
-    canvas.width = width; canvas.height = height; // cap backing pixels for TV browsers
-    var count = Math.min(30, Math.max(14, Math.round(width * height / 22000)));
+    var w = Math.max(1, window.innerWidth || document.documentElement.clientWidth || 1);
+    var h = Math.max(1, window.innerHeight || document.documentElement.clientHeight || 1);
+    if (w === width && h === height && nodes.length) return;
+    width = w; height = h;
+    var dpr = window.devicePixelRatio || 1;
+    scale = Math.max(0.25, Math.min(1.5, dpr, 1280 / w, 720 / h));
+    canvas.width = Math.max(1, Math.round(w * scale));
+    canvas.height = Math.max(1, Math.round(h * scale));
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);
+    var count = Math.min(isCoarse ? 34 : 55, Math.max(isCoarse ? 21 : 27,
+      Math.round(w * h / (isCoarse ? 17500 : 22000))));
     nodes = [];
     for (var i = 0; i < count; i++) {
-      nodes.push({x:random(7,width-7), y:random(7,height-7),
-        vx:random(-0.12,0.12), vy:random(-0.12,0.12), r:random(1.2,2.2)});
+      nodes.push({
+        bx: between(3, w - 3), by: between(3, h - 3),
+        x: 0, y: 0, ox: 0, oy: 0, vx: between(-0.12, 0.12),
+        vy: between(-0.12, 0.12), radius: between(1.1, 2.2)
+      });
     }
-    paint(0, false);
+    draw(false, 0);
   }
-  function paint(now, move) {
+  function draw(moving, now) {
     ctx.clearRect(0, 0, width, height);
-    var i, j, a, b, dx, dy, dist2, radius = width < 500 ? 135 : 170;
-    var maxDist2 = radius * radius, opacity;
-    if (move) {
-      for (i = 0; i < nodes.length; i++) {
-        a = nodes[i];
-        a.x += a.vx; a.y += a.vy;
-        if (a.x < 5 || a.x > width - 5) a.vx *= -1;
-        if (a.y < 5 || a.y > height - 5) a.vy *= -1;
+    var active = !isCoarse && now - mouse.seen < 1500;
+    var i, j, a, b, dx, dy, d2, dist, targetX, targetY;
+    for (i = 0; i < nodes.length; i++) {
+      a = nodes[i]; targetX = 0; targetY = 0;
+      if (moving) {
+        a.bx += a.vx; a.by += a.vy;
+        if (a.bx < 3 || a.bx > width - 3) a.vx = -a.vx;
+        if (a.by < 3 || a.by > height - 3) a.vy = -a.vy;
+        a.bx = Math.max(3, Math.min(width - 3, a.bx));
+        a.by = Math.max(3, Math.min(height - 3, a.by));
       }
+      if (active) {
+        dx = a.bx - mouse.x; dy = a.by - mouse.y; d2 = dx * dx + dy * dy;
+        if (d2 < 170 * 170 && d2 > 1) {
+          dist = Math.sqrt(d2);
+          var repel = (1 - dist / 170) * 27;
+          targetX = dx / dist * repel; targetY = dy / dist * repel;
+        }
+      }
+      if (moving) {
+        a.ox += (targetX - a.ox) * .12;
+        a.oy += (targetY - a.oy) * .12;
+      }
+      a.x = a.bx + a.ox; a.y = a.by + a.oy;
     }
-    ctx.lineWidth = 0.85;
+    var reach = width < 600 ? 145 : 175, reach2 = reach * reach;
+    ctx.lineWidth = .9;
     for (i = 0; i < nodes.length; i++) {
       a = nodes[i];
       for (j = i + 1; j < nodes.length; j++) {
-        b = nodes[j]; dx = a.x - b.x; dy = a.y - b.y;
-        dist2 = dx * dx + dy * dy;
-        if (dist2 >= maxDist2) continue;
-        opacity = (1 - dist2 / maxDist2) * 0.19;
-        ctx.strokeStyle = "rgba(121,179,255," + opacity.toFixed(3) + ")";
-        ctx.beginPath(); ctx.moveTo(a.x,a.y);
+        b = nodes[j];
+        dx = a.x - b.x; dy = a.y - b.y; d2 = dx * dx + dy * dy;
+        if (d2 >= reach2) continue;
+        var opacity = (1 - d2 / reach2) * .27;
+        if (active) {
+          var px = (a.x + b.x) * .5 - mouse.x;
+          var py = (a.y + b.y) * .5 - mouse.y;
+          if (px * px + py * py < 155 * 155) opacity += .075;
+        }
+        ctx.strokeStyle = "rgba(121,179,255," + Math.min(.35, opacity).toFixed(3) + ")";
+        ctx.beginPath(); ctx.moveTo(a.x, a.y);
         if ((i + j) % 5 === 0) {
           var mid = (a.x + b.x) / 2;
-          ctx.lineTo(mid,a.y); ctx.lineTo(mid,b.y);
+          ctx.lineTo(mid, a.y); ctx.lineTo(mid, b.y);
         }
-        ctx.lineTo(b.x,b.y); ctx.stroke();
+        ctx.lineTo(b.x, b.y); ctx.stroke();
       }
     }
     for (i = 0; i < nodes.length; i++) {
       a = nodes[i];
-      ctx.beginPath(); ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
-      ctx.fillStyle = i === 0 ? "rgba(228,91,114,0.6)" : "rgba(140,192,255,0.45)";
+      ctx.beginPath(); ctx.arc(a.x, a.y, a.radius, 0, Math.PI * 2);
+      ctx.fillStyle = i % 17 === 0 ? "rgba(230,75,103,.55)" : "rgba(143,191,255,.52)";
       ctx.fill();
     }
   }
   function tick(now) {
     if (!running) return;
-    if (now - last >= fpsInterval) { last = now; paint(now,true); }
+    if (now - last >= interval) { last = now; draw(true, now); }
     frame = raf(tick);
   }
-  function checkVisibility() {
-    var rect = canvas.getBoundingClientRect();
-    var inView = rect.bottom > 0 && rect.top < (window.innerHeight || 900);
-    var active = inView && !document.hidden && !reducedMotion && !saveData && !!raf;
-    if (active && !running) { running = true; last = 0; frame = raf(tick); }
-    else if (!active && running) {
+  function check() {
+    var canMove = !document.hidden && !reduced && !saveData && !!raf;
+    if (canMove && !running) { running = true; last = 0; frame = raf(tick); }
+    else if (!canMove && running) {
       running = false;
-      if (cancel) cancel(frame);
+      if (caf) caf(frame);
+      draw(false, 0);
     }
   }
-  function onResize() { resize(); checkVisibility(); }
-  resize();
-  if (!raf || reducedMotion || saveData) return; // static connected nodes instead
-  window.addEventListener("scroll", checkVisibility, false);
-  window.addEventListener("resize", onResize, false);
-  document.addEventListener("visibilitychange", checkVisibility, false);
-  if (motionQuery) {
-    var changed = function(event) { reducedMotion = event.matches; checkVisibility(); };
-    if (motionQuery.addEventListener) motionQuery.addEventListener("change", changed);
-    else if (motionQuery.addListener) motionQuery.addListener(changed);
+  function point(x, y) {
+    mouse.x = x; mouse.y = y;
+    mouse.seen = window.performance && window.performance.now ? window.performance.now() : 0;
   }
-  checkVisibility();
+  resize();
+  window.addEventListener("resize", resize, false);
+  document.addEventListener("visibilitychange", check, false);
+  if (window.PointerEvent) {
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "mouse" || e.pointerType === "pen") point(e.clientX, e.clientY);
+    }, false);
+    window.addEventListener("pointerout", function (e) {
+      if (!e.relatedTarget) mouse.seen = -99999;
+    }, false);
+  } else {
+    window.addEventListener("mousemove", function (e) { if (!isCoarse) point(e.clientX, e.clientY); }, false);
+  }
+  if (mq) {
+    var changed = function (e) { reduced = e.matches; check(); };
+    if (mq.addEventListener) mq.addEventListener("change", changed);
+    else if (mq.addListener) mq.addListener(changed);
+  }
+  if (navigator.connection && navigator.connection.addEventListener) {
+    navigator.connection.addEventListener("change", function () {
+      saveData = !!navigator.connection.saveData; check();
+    });
+  }
+  check();
 }());

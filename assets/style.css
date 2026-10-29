@@ -95,10 +95,12 @@ button{font:inherit}
 .site-footer{border-top:1px solid var(--rule)}
 ::selection{background:#2C60AA;color:#FFFFFF}
 
-/* Subtle motion is limited to the hero so project pages stay light. */
-.hero-copy{position:relative;isolation:isolate}
-.circuit-field{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.9}
-@media(max-width:680px){.circuit-field{opacity:.65}}
+/* Global, lightweight circuit field. Text and interactive elements remain above it. */
+.circuit-field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.94}
+body>:not(.circuit-field){position:relative;z-index:1}
+.site-header{background:rgba(9,14,24,.95)}
+.hero-aside,.studios{background:rgba(17,29,48,.95)}
+@media(max-width:680px){.circuit-field{opacity:.79}}
 @media print{.circuit-field{display:none}}
 
 /* BlazeDevStudio v3 — same editorial geometry, approved B in the hero. */
