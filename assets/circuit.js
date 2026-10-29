@@ -12,8 +12,8 @@
   var nodes = [];
   var width = 1, height = 1, running = false, frame = 0, last = 0;
   var fpsInterval = 1000 / 20;
-  var raf = window.requestAnimationFrame;
-  var cancel = window.cancelAnimationFrame;
+  var raf = window.requestAnimationFrame ? function(cb) { return window.requestAnimationFrame(cb); } : null;
+  var cancel = window.cancelAnimationFrame ? function(id) { window.cancelAnimationFrame(id); } : null;
   var lastSize = "";
 
   function random(min, max) { return min + Math.random() * (max - min); }
