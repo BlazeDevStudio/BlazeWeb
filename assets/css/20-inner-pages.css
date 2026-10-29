@@ -1,0 +1,88 @@
+/* secondary page patterns — CSS layer 2. Original cascade order preserved. */
+
+.inner-hero {
+  padding:76px 0 65px;
+  min-height:355px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border-bottom:1px solid var(--rule)
+}
+.inner-hero h1 {
+  font-size:clamp(60px,10vw,132px);
+  line-height:.9;
+  letter-spacing:-.09em;
+  margin:24px 0 25px
+}
+.inner-hero .intro {
+  font-size:18px;
+  max-width:520px;
+  margin:0
+}
+.inner-hero .back {
+  font:12px ui-monospace,SFMono-Regular,Consolas,monospace;
+  color:var(--soft)
+}
+.inner-hero .back a {
+  border-bottom:1px solid var(--accent);
+  color:var(--ink)
+}
+.inner-section {
+  padding:62px 0 105px
+}
+.two-col {
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:40px
+}
+.inner-section .section-heading {
+  font-size:clamp(32px,4vw,49px);
+  margin:0 0 30px
+}
+.fact-row {
+  display:grid;
+  grid-template-columns:minmax(150px,.6fr) minmax(0,1fr);
+  gap:25px;
+  padding:22px 0;
+  border-top:1px solid var(--rule);
+  font-size:14px
+}
+.fact-row strong {
+  font-size:19px;
+  letter-spacing:-.04em
+}
+.fact-row span {
+  color:var(--soft)
+}
+.fact-row:last-child {
+  border-bottom:1px solid var(--rule)
+}
+.small-note {
+  margin:22px 0 0;
+  font-size:12px;
+  color:var(--soft)
+}
+.editorial {
+  font:clamp(22px,3vw,33px)/1.35 Georgia,"Times New Roman",serif;
+  max-width:700px;
+  margin:0
+}
+.editorial strong {
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:800
+}
+.about-stack {
+  max-width:850px
+}
+.about-stack p {
+  font-size:clamp(21px,3vw,30px);
+  line-height:1.33;
+  letter-spacing:-.045em;
+  margin:0 0 24px
+}
+.about-stack p.small {
+  font-size:15px;
+  letter-spacing:0;
+  color:var(--soft);
+  max-width:560px
+}

@@ -1,9 +1,160 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#090E18"><meta name="description" content="BlazeWorks — software, electronics, PC repair and projects from BlazeDevStudio."><title>BlazeWorks</title><link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/style.css"><script src="./assets/circuit.js" defer></script></head>
-<body><canvas id="circuit-field" class="circuit-field" aria-hidden="true"></canvas><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="container header-inner"><a class="wordmark" href="./" aria-label="BlazeWorks home">blaze<span class="mark">/</span>works</a><nav class="nav" aria-label="Main navigation"><a href="./projects/">Work</a><a href="./systems/">Systems</a><a href="./manrealtech/">Repairs</a><a href="./labs/">Lab</a><a href="./about/">About</a></nav></div></header>
-<main id="main">
-<section class="hero container"><div class="hero-copy"><div><span class="kicker">BlazeDevStudio &nbsp; / &nbsp; Software + hardware</span><h1>Build.<br><em>Fix.</em><br>Repeat.</h1><p class="hero-sub">Software, electronics and PC repair.</p></div><div class="hero-meta"><a class="text-link" href="./projects/">See the work <span class="arrow">↗</span></a></div></div><div class="hero-aside"><div class="folio"><span>FIG. 01</span><span>LCMXO640E / LOGIC</span></div><a class="chip-diagram-link" href="./assets/diagrams/lcmxo640e-logic-architecture.svg" target="_blank" rel="noopener" aria-label="Open detailed LCMXO640E FPGA internal logic architecture in full resolution" title="Open full-size chip logic diagram"><img class="chip-diagram" src="./assets/diagrams/lcmxo640e-logic-architecture.svg" width="660" height="780" loading="eager" decoding="async" alt="Detailed architectural diagram of the LCMXO640E FPGA showing programmable I/O, PFU and PFF fabric, JTAG, configuration, and two LUT4-to-register paths"></a><div class="aside-caption"><span>BlazeWorks / 2026</span><a href="https://www.latticesemi.com/-/media/LatticeSemi/Documents/DataSheets/MachXO23/FPGA-DS-02071-3-3-MachXO-Family-Data-Sheet.ashx?document_id=9922" target="_blank" rel="noopener" title="Official Lattice MachXO datasheet">Lattice / MachXO ↗</a></div></div></section>
-<section class="section container" id="work"><div class="section-header"><div><span class="overline">01 / Work</span><h2 class="section-heading">On the bench.</h2></div><p class="section-note">Public repositories. Most are still being worked on.</p></div><div class="work-list"><a class="work-row" href="https://github.com/BlazeDevStudio/BlazeMCUstudio" aria-label="Blaze MCU Studio on GitHub"><span class="number">01</span><h3>Blaze MCU Studio</h3><p>Microcontroller development tools</p><span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/BlazeMessenger" aria-label="Blaze Messenger on GitHub"><span class="number">02</span><h3>Blaze Messenger</h3><p>Chat and file sharing over LAN</p><span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/BlazeUnifiedElSim" aria-label="Unified ElSim on GitHub"><span class="number">03</span><h3>Unified ElSim</h3><p>Electronics design experiments</p><span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/CoinOperatedEcosystem" aria-label="Coin-Operated Ecosystem on GitHub"><span class="number">04</span><h3>Coin-Operated Ecosystem</h3><p>Coin-operated controls · evolving project</p><span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/B-Secure" aria-label="B-Secure on GitHub"><span class="number">05</span><h3>B-Secure</h3><p>Chrome security extension · source and tests</p><span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/BlazingSystems-Projects/tree/main/networking/blazenetmonitor" aria-label="BlazeNetMonitor on GitHub"><span class="number">06</span><h3>BlazeNetMonitor</h3><p>Windows network monitor · source and tests</p><span class="go" aria-hidden="true">↗</span></a></div><div class="work-footer"><span>Links open the source repositories.</span><a class="text-link" href="./projects/">All projects <span class="arrow">↗</span></a></div></section>
-<section class="studios"><div class="container"><span class="overline">02 / Under one roof</span><h2 class="studios-heading">What I do.</h2><div class="studio-grid"><div class="studio"><span class="studio-num">01</span><h3>Blaze Systems</h3><p>Software and electronics.</p><a href="./systems/">View systems ↗</a></div><div class="studio"><span class="studio-num">02</span><h3>ManrealTech</h3><p>Computer repair and IT work.</p><a href="./manrealtech/">View repairs ↗</a></div><div class="studio"><span class="studio-num">03</span><h3>Blaze Labs</h3><p>Experiments and things not ready yet.</p><a href="./labs/">Open the lab ↗</a></div></div></div></section>
-
-</main><footer class="site-footer"><div class="container footer-inner"><small>© 2026 BlazeWorks &nbsp;·&nbsp; Made by BlazeDevStudio</small><a href="https://github.com/BlazeDevStudio">GitHub ↗</a></div></footer></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#090E18">
+    <meta name="description" content="BlazeWorks — software, electronics, PC repair and projects from BlazeDevStudio.">
+    <title>
+      BlazeWorks
+    </title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="./assets/circuit.js" defer>
+    </script>
+  </head>
+  <body>
+    <canvas id="circuit-field" class="circuit-field" aria-hidden="true"></canvas><a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="wordmark" href="./" aria-label="BlazeWorks home">blaze<span class="mark">/</span>works</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="./projects/">Work</a><a href="./systems/">Systems</a><a href="./manrealtech/">Repairs</a><a href="./labs/">Lab</a><a href="./about/">About</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero container">
+        <div class="hero-copy">
+          <div>
+            <span class="kicker">BlazeDevStudio &nbsp; / &nbsp; Software + hardware</span>
+            <h1>
+              Build.<br><em>Fix.</em><br>Repeat.
+            </h1>
+            <p class="hero-sub">
+              Software, electronics and PC repair.
+            </p>
+          </div>
+          <div class="hero-meta">
+            <a class="text-link" href="./projects/">See the work <span class="arrow">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-aside">
+          <div class="folio">
+            <span>FIG. 01</span><span>LCMXO640E / LOGIC</span>
+          </div>
+          <a class="chip-diagram-link" href="./assets/diagrams/lcmxo640e-logic-architecture.svg" target="_blank" rel="noopener" aria-label="Open detailed LCMXO640E FPGA internal logic architecture in full resolution" title="Open full-size chip logic diagram"><img class="chip-diagram" src="./assets/diagrams/lcmxo640e-logic-architecture.svg" width="660" height="780" loading="eager" decoding="async" alt="Detailed architectural diagram of the LCMXO640E FPGA showing programmable I/O, PFU and PFF fabric, JTAG, configuration, and two LUT4-to-register paths"></a>
+          <div class="aside-caption">
+            <span>BlazeWorks / 2026</span><a href="https://www.latticesemi.com/-/media/LatticeSemi/Documents/DataSheets/MachXO23/FPGA-DS-02071-3-3-MachXO-Family-Data-Sheet.ashx?document_id=9922" target="_blank" rel="noopener" title="Official Lattice MachXO datasheet">Lattice / MachXO ↗</a>
+          </div>
+        </div>
+      </section>
+      <section class="section container" id="work">
+        <div class="section-header">
+          <div>
+            <span class="overline">01 / Work</span>
+            <h2 class="section-heading">
+              On the bench.
+            </h2>
+          </div>
+          <p class="section-note">
+            Public repositories. Most are still being worked on.
+          </p>
+        </div>
+        <div class="work-list">
+          <a class="work-row" href="https://github.com/BlazeDevStudio/BlazeMCUstudio" aria-label="Blaze MCU Studio on GitHub"><span class="number">01</span>
+          <h3>
+            Blaze MCU Studio
+          </h3>
+          <p>
+            Microcontroller development tools
+          </p>
+          <span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/BlazeMessenger" aria-label="Blaze Messenger on GitHub"><span class="number">02</span>
+          <h3>
+            Blaze Messenger
+          </h3>
+          <p>
+            Chat and file sharing over LAN
+          </p>
+          <span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/BlazeUnifiedElSim" aria-label="Unified ElSim on GitHub"><span class="number">03</span>
+          <h3>
+            Unified ElSim
+          </h3>
+          <p>
+            Electronics design experiments
+          </p>
+          <span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/CoinOperatedEcosystem" aria-label="Coin-Operated Ecosystem on GitHub"><span class="number">04</span>
+          <h3>
+            Coin-Operated Ecosystem
+          </h3>
+          <p>
+            Coin-operated controls · evolving project
+          </p>
+          <span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/B-Secure" aria-label="B-Secure on GitHub"><span class="number">05</span>
+          <h3>
+            B-Secure
+          </h3>
+          <p>
+            Chrome security extension · source and tests
+          </p>
+          <span class="go" aria-hidden="true">↗</span></a><a class="work-row" href="https://github.com/BlazeDevStudio/BlazingSystems-Projects/tree/main/networking/blazenetmonitor" aria-label="BlazeNetMonitor on GitHub"><span class="number">06</span>
+          <h3>
+            BlazeNetMonitor
+          </h3>
+          <p>
+            Windows network monitor · source and tests
+          </p>
+          <span class="go" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="work-footer">
+          <span>Links open the source repositories.</span><a class="text-link" href="./projects/">All projects <span class="arrow">↗</span></a>
+        </div>
+      </section>
+      <section class="studios">
+        <div class="container">
+          <span class="overline">02 / Under one roof</span>
+          <h2 class="studios-heading">
+            What I do.
+          </h2>
+          <div class="studio-grid">
+            <div class="studio">
+              <span class="studio-num">01</span>
+              <h3>
+                Blaze Systems
+              </h3>
+              <p>
+                Software and electronics.
+              </p>
+              <a href="./systems/">View systems ↗</a>
+            </div>
+            <div class="studio">
+              <span class="studio-num">02</span>
+              <h3>
+                ManrealTech
+              </h3>
+              <p>
+                Computer repair and IT work.
+              </p>
+              <a href="./manrealtech/">View repairs ↗</a>
+            </div>
+            <div class="studio">
+              <span class="studio-num">03</span>
+              <h3>
+                Blaze Labs
+              </h3>
+              <p>
+                Experiments and things not ready yet.
+              </p>
+              <a href="./labs/">Open the lab ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <small>© 2026 BlazeWorks &nbsp;·&nbsp; Made by BlazeDevStudio</small><a href="https://github.com/BlazeDevStudio">GitHub ↗</a>
+      </div>
+    </footer>
+  </body>
+</html>

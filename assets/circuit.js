@@ -1,3 +1,9 @@
+/*
+ * Global moving-node background. Pure JavaScript; no dependencies.
+ * resize(): device density. draw(): connections and cursor response.
+ * check(): reduced motion, hidden tabs, and data-saving preferences.
+ */
+
 (function () {
   "use strict";
   var canvas = document.getElementById("circuit-field");

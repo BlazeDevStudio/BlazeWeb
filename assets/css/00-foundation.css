@@ -1,0 +1,51 @@
+/* tokens / reset / accessibility — CSS layer 0. Original cascade order preserved. */
+
+:root {
+  color-scheme:dark;
+  --paper:#090E18;
+  --ink:#F3F7FF;
+  --soft:#A8B8D3;
+  --rule:#2A3852;
+  --accent:#79B3FF;
+  --accent-hover:#B5D6FF;
+  --signal:#E45B72;
+  --panel:#111D30;
+  --panel-hover:#16233A;
+  --frame:1136px
+}
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth
+}
+body {
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:16px/1.5 Arial,Helvetica,sans-serif;
+  -webkit-font-smoothing:antialiased
+}
+a {
+  color:inherit;
+  text-decoration:none
+}
+a:focus-visible {
+  outline:2px solid var(--accent);
+  outline-offset:5px
+}
+button {
+  font:inherit
+}
+.skip {
+  position:absolute;
+  left:-9999px;
+  top:0;
+  background:var(--accent);
+  color:#090E18;
+  z-index:10;
+  padding:12px
+}
+.skip:focus {
+  left:0
+}

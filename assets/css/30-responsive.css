@@ -1,0 +1,171 @@
+/* mobile and tablet breakpoints — CSS layer 3. Original cascade order preserved. */
+
+@media(max-width:850px) {
+  .hero {
+    min-height:540px;
+    grid-template-columns:1.1fr .9fr
+  }
+  .hero h1 {
+    font-size:clamp(56px,9.3vw,90px)
+  }
+  .hero-copy {
+    padding-top:58px
+  }
+  .work-row {
+    grid-template-columns:47px minmax(0,1fr) minmax(0,.8fr) 22px
+  }
+}
+@media(max-width:680px) {
+  .container {
+    width:min(var(--frame),calc(100% - 36px))
+  }
+  .header-inner {
+    min-height:88px;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:14px;
+    padding:16px 0
+  }
+  .wordmark {
+    font-size:25px
+  }
+  .nav {
+    gap:18px
+  }
+  .nav a {
+    font-size:12px
+  }
+  .hero {
+    display:block;
+    min-height:0
+  }
+  .hero-copy {
+    padding:64px 0 56px
+  }
+  .hero h1 {
+    font-size:clamp(66px,15vw,106px);
+    margin:35px 0
+  }
+  .hero-sub {
+    font-size:17px
+  }
+  .hero-aside {
+    min-height:215px;
+    border-left:0;
+    border-top:1px solid var(--rule);
+    padding:14px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    align-items:center
+  }
+  .artwork {
+    max-width:150px;
+    max-height:180px;
+    margin:auto
+  }
+  .hero-aside .folio {
+    flex-direction:column;
+    gap:5px
+  }
+  .aside-caption {
+    flex-direction:column;
+    align-items:flex-start;
+    border-top:0;
+    padding:0
+  }
+  .section {
+    padding:56px 0 70px
+  }
+  .section-header {
+    align-items:start;
+    flex-direction:column;
+    gap:10px
+  }
+  .work-row {
+    grid-template-columns:28px 1fr 24px;
+    gap:10px;
+    padding:22px 4px
+  }
+  .work-row p {
+    grid-column:2;
+    font-size:13px;
+    grid-row:2
+  }
+  .work-row .go {
+    grid-column:3;
+    grid-row:1
+  }
+  .work-row h3 {
+    font-size:25px
+  }
+  .work-footer {
+    align-items:start;
+    flex-direction:column
+  }
+  .studios {
+    padding:57px 0 70px
+  }
+  .studio-grid {
+    display:block
+  }
+  .studio {
+    border:0;
+    border-bottom:1px solid #364866;
+    margin:0;
+    min-height:0;
+    padding:17px 0 24px
+  }
+  .studio h3 {
+    margin:12px 0 5px
+  }
+  .studio p {
+    margin-bottom:12px
+  }
+  .note-strip {
+    padding:32px 0
+  }
+  .note-strip .container {
+    flex-direction:column;
+    gap:14px
+  }
+  .footer-inner {
+    align-items:start;
+    flex-direction:column;
+    gap:9px
+  }
+  .inner-hero {
+    min-height:330px;
+    padding:55px 0 42px
+  }
+  .inner-hero h1 {
+    font-size:clamp(57px,12vw,90px)
+  }
+  .inner-hero .intro {
+    font-size:17px
+  }
+  .inner-section {
+    padding:45px 0 75px
+  }
+  .two-col {
+    display:block
+  }
+  .two-col>.overline {
+    display:block;
+    margin-bottom:26px
+  }
+  .fact-row {
+    grid-template-columns:1fr;
+    gap:6px;
+    padding:18px 0
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior:auto
+  }
+  .work-row {
+    transition:none
+  }
+}

@@ -1,0 +1,93 @@
+/* brand colors and animated layer — CSS layer 4. Original cascade order preserved. */
+
+/* Minimal blue topaz highlights, no gradients */
+.kicker,.folio,.studio-num,.overline {
+  color:var(--accent)
+}
+.nav a:hover,.nav a[aria-current=page] {
+  color:var(--accent-hover)
+}
+.work-row .go {
+  color:var(--accent)
+}
+.site-footer {
+  border-top:1px solid var(--rule)
+}
+::selection {
+  background:#2C60AA;
+  color:#FFFFFF
+}
+/* Global, lightweight circuit field. Text and interactive elements remain above it. */
+.circuit-field {
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+  opacity:.94
+}
+body>:not(.circuit-field) {
+  position:relative;
+  z-index:1
+}
+.site-header {
+  background:rgba(9,14,24,.95)
+}
+.hero-aside,.studios {
+  background:rgba(17,29,48,.95)
+}
+@media(max-width:680px) {
+  .circuit-field {
+    opacity:.79
+  }
+}
+@media print {
+  .circuit-field {
+    display:none
+  }
+}
+/* BlazeDevStudio v3 — same editorial geometry, approved B in the hero. */
+.brand-emblem {
+  display:block;
+  align-self:center;
+  width:min(100%,320px);
+  max-height:350px;
+  height:auto;
+  object-fit:contain
+}
+@media(max-width:680px) {
+  .brand-emblem {
+    max-width:175px;
+    max-height:185px
+  }
+}
+/* LCMXO640E architecture diagram: open the full SVG for legible circuit labels. */
+.chip-diagram-link {
+  display:block;
+  align-self:center;
+  width:100%;
+  max-width:335px;
+  outline-offset:5px
+}
+.chip-diagram {
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:380px;
+  object-fit:contain
+}
+.chip-diagram-link:hover .chip-diagram {
+  filter:brightness(1.09)
+}
+.aside-caption a:hover {
+  color:var(--accent-hover)
+}
+@media(max-width:680px) {
+  .chip-diagram-link {
+    max-width:175px
+  }
+  .chip-diagram {
+    max-height:196px
+  }
+}
