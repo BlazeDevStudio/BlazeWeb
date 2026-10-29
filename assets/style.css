@@ -113,3 +113,106 @@ body>:not(.circuit-field){position:relative;z-index:1}
 .chip-diagram-link:hover .chip-diagram{filter:brightness(1.09)}
 .aside-caption a:hover{color:var(--accent-hover)}
 @media(max-width:680px){.chip-diagram-link{max-width:175px}.chip-diagram{max-height:196px}}
+
+/* Resume-style About page. Uses the site's editorial typography and established palette. */
+.resume-hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,.65fr);gap:6%;min-height:610px;border-bottom:1px solid var(--rule);padding-top:67px;padding-bottom:74px}
+.resume-hero .back{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--soft);margin-bottom:55px}
+.resume-hero .back a{color:var(--ink);border-bottom:1px solid var(--accent)}
+.resume-hero h1{font-size:clamp(70px,9vw,126px);line-height:.9;letter-spacing:-.085em;margin:22px 0 30px}
+.resume-hero h1 em{font-family:Georgia,"Times New Roman",serif;color:var(--accent);font-weight:400;letter-spacing:-.08em}
+.resume-lead{font-size:clamp(21px,2.5vw,30px);line-height:1.25;letter-spacing:-.04em;margin:0 0 19px;font-weight:700;max-width:630px}
+.resume-intro{font-size:16px;color:var(--soft);line-height:1.75;max-width:640px;margin:0 0 30px}
+.resume-actions{display:flex;flex-wrap:wrap;gap:26px;align-items:center}
+.resume-print{background:transparent;border:0;border-bottom:1px solid var(--rule);color:var(--soft);cursor:pointer;font-size:13px;font-weight:650;padding:0 0 7px}
+.resume-print:hover{color:var(--accent-hover);border-color:var(--accent)}
+.resume-print:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.resume-hero-side{align-self:stretch;border-left:1px solid var(--rule);padding:20px 0 9px 30px;display:flex;flex-direction:column;gap:27px}
+.resume-side-heading,.resume-side-footer,.resume-period,.resume-index,.resume-education-stage{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.05em}
+.resume-side-heading{color:var(--accent)}
+.resume-stat{border-top:1px solid var(--rule);padding-top:23px}
+.resume-stat strong{font-size:clamp(43px,5vw,74px);letter-spacing:-.08em;line-height:1;display:block}
+.resume-stat span{display:block;font-size:13px;line-height:1.6;color:var(--soft);margin-top:10px}
+.resume-side-footer{margin-top:auto;line-height:1.8;color:var(--soft);border-top:1px solid var(--rule);padding-top:15px}
+.resume-jump{display:flex;gap:24px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding:22px 0}
+.resume-jump a{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--soft)}
+.resume-jump a:hover,.resume-jump a:focus-visible{color:var(--accent-hover)}
+.resume-section{display:grid;grid-template-columns:190px minmax(0,1fr);gap:52px;padding-top:70px;padding-bottom:72px;border-bottom:1px solid var(--rule);scroll-margin-top:24px}
+.resume-section-label{padding-top:12px}
+.resume-section-content h2{font-size:clamp(34px,4.7vw,57px);letter-spacing:-.065em;line-height:1.05;margin:0 0 27px}
+.resume-prose{max-width:760px}
+.resume-prose p{font-size:17px;line-height:1.78;margin:0 0 20px}
+.resume-prose a{color:var(--accent);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--rule)}
+.resume-prose a:hover{color:var(--accent-hover)}
+.resume-entry{display:grid;grid-template-columns:147px minmax(0,1fr);gap:20px;border-top:1px solid var(--rule);padding:25px 0 28px}
+.resume-entry:last-child{border-bottom:1px solid var(--rule)}
+.resume-period{color:var(--accent);padding-top:5px;white-space:normal}
+.resume-entry h3,.resume-skill-group h3,.resume-education-item h3{font-size:clamp(21px,2.4vw,28px);line-height:1.17;letter-spacing:-.045em;margin:0 0 7px}
+.resume-entry p{margin:0 0 12px;color:var(--soft);line-height:1.65}
+.resume-entry .resume-place{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.02em;color:var(--accent-hover);margin-bottom:15px}
+.resume-entry ul,.resume-skill-group ul{padding:0;margin:12px 0 0;list-style:none}
+.resume-entry li{margin:10px 0;padding-left:17px;position:relative;font-size:14px;line-height:1.67}
+.resume-entry li:before{content:"—";position:absolute;left:0;color:var(--accent)}
+.resume-section-note{color:var(--soft);font-size:14px;line-height:1.65;margin:-6px 0 28px;max-width:630px}
+.resume-skills{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+.resume-skill-group{border-top:1px solid var(--rule);padding:22px 0 32px}
+.resume-index{color:var(--accent)}
+.resume-skill-group h3{font-size:22px;margin:16px 0}
+.resume-skill-group li{font-size:14px;color:var(--soft);padding:5px 0;line-height:1.5}
+.resume-education-item{display:grid;grid-template-columns:140px 1fr;gap:25px;padding:25px 0;border-top:1px solid var(--rule)}
+.resume-education-item:last-child{border-bottom:1px solid var(--rule)}
+.resume-education-stage{color:var(--accent);padding-top:5px}
+.resume-education-item p{color:var(--soft);margin:10px 0 0;font-size:14px;line-height:1.65}
+.resume-education-note{font-size:14px;color:var(--soft);line-height:1.65;margin:22px 0 0}
+.resume-project-list{border-top:1px solid var(--rule)}
+.resume-project{display:grid;grid-template-columns:32px minmax(0,1fr) 140px 22px;gap:16px;align-items:center;padding:22px 8px;border-bottom:1px solid var(--rule)}
+.resume-project:hover{background:var(--panel-hover)}
+.resume-project-main strong{display:block;font-size:21px;letter-spacing:-.04em;line-height:1.2}
+.resume-project-main small{display:block;font-size:13px;color:var(--soft);line-height:1.6;margin-top:6px}
+.resume-project-kind{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--soft)}
+.resume-project-arrow{font-size:24px;color:var(--accent)}
+.resume-more{margin-top:26px}
+.resume-closer{font-size:19px;line-height:1.7;max-width:690px;margin:0 0 30px}
+.resume-last{border-bottom:0;padding-bottom:100px}
+@media(max-width:850px){.resume-hero{grid-template-columns:minmax(0,1.4fr) minmax(205px,.6fr);gap:4%}.resume-hero-side{padding-left:20px}.resume-section{grid-template-columns:140px 1fr;gap:28px}}
+@media(max-width:680px){
+.resume-hero{display:block;padding:45px 0 42px;min-height:0}
+.resume-hero .back{margin-bottom:37px}
+.resume-hero h1{font-size:clamp(63px,14vw,93px);margin:21px 0}
+.resume-intro{font-size:15px}
+.resume-hero-side{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:16px;border-left:0;border-top:1px solid var(--rule);padding:16px 0 0}
+.resume-side-heading,.resume-side-footer{grid-column:1/-1}
+.resume-stat{padding-top:16px}
+.resume-stat strong{font-size:50px}
+.resume-side-footer{margin-top:0}
+.resume-jump{gap:17px 20px;padding:18px 0}
+.resume-section{display:block;padding:48px 0 51px}
+.resume-section-label{margin-bottom:20px}
+.resume-section-content h2{font-size:clamp(33px,9vw,47px)}
+.resume-prose p{font-size:16px}
+.resume-entry,.resume-education-item{display:block;padding:23px 0}
+.resume-period,.resume-education-stage{display:block;margin-bottom:11px}
+.resume-skills{grid-template-columns:1fr;gap:0}
+.resume-skill-group{padding-bottom:22px}
+.resume-project{grid-template-columns:25px minmax(0,1fr) 22px;gap:10px}
+.resume-project-main strong{font-size:19px}
+.resume-project-kind{grid-column:2;grid-row:2}
+.resume-project-arrow{grid-column:3;grid-row:1}
+.resume-last{padding-bottom:70px}
+}
+@media print{
+:root{color-scheme:light;--paper:#fff;--ink:#111;--soft:#444;--rule:#bbb;--accent:#174e99;--accent-hover:#174e99}
+html,body{background:#fff!important;color:#111!important;font-size:11pt}
+.site-header,.site-footer,.circuit-field,.resume-print,.resume-jump,.resume-actions,.skip{display:none!important}
+body>:not(.circuit-field){z-index:auto}
+.resume-hero,.resume-section{break-inside:auto;padding:20px 0 15px}
+.resume-hero{min-height:0}
+.resume-hero h1{font-size:52pt}
+.resume-hero-side{display:none}
+.resume-section{grid-template-columns:100px 1fr;gap:20px}
+.resume-section-content h2{font-size:21pt}
+.resume-entry,.resume-skill-group,.resume-project,.resume-education-item{break-inside:avoid}
+.resume-prose p,.resume-entry li{font-size:10pt;line-height:1.45}
+.resume-project{padding:12px 0}
+.container{width:100%;max-width:none}
+@page{size:A4;margin:14mm}
+}
