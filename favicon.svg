@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BlazeDevStudio mark"><rect width="64" height="64" rx="13" fill="#090F1D"/><path d="M16 13H35Q48 13 48 24Q48 30 41 32Q51 34 51 42Q51 52 37 52H16V42L34 27H16Z" fill="#1671E6"/><path d="M16 13H29L38 22H20L16 18Z" fill="#F4F7FF"/><path d="M19 52L29 44H38L29 52Z" fill="#F4F7FF"/><path d="M16 38L39 20Q41 18 43 21L47 25Q48 27 46 28L16 52Z" fill="#72B2FF"/><circle cx="49" cy="12" r="4" fill="#F10843"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"><defs>
+  <linearGradient id="top" x1=".1" x2=".89" y1=".15" y2=".9" objectBoundingBox="true"><stop stop-color="#1387FE"/><stop offset=".56" stop-color="#398FFC"/><stop offset="1" stop-color="#0263E9"/></linearGradient>
+  <linearGradient id="upper" x1="0" x2="1" y1="0" y2=".7" objectBoundingBox="true"><stop stop-color="#279BFA"/><stop offset=".5" stop-color="#1B81FE"/><stop offset="1" stop-color="#0061EF"/></linearGradient>
+  <linearGradient id="lower" x1=".15" y1=".25" x2="1" y2=".85" objectBoundingBox="true"><stop stop-color="#1889FB"/><stop offset=".5" stop-color="#429EFE"/><stop offset="1" stop-color="#4AB8FF"/></linearGradient>
+  <linearGradient id="bottom" x1=".1" y1="1" x2=".9" y2="0" objectBoundingBox="true"><stop stop-color="#0761F6"/><stop offset=".58" stop-color="#166FFA"/><stop offset="1" stop-color="#327CFC"/></linearGradient>
+  <linearGradient id="ribbon" x1="0" y1="1" x2="1" y2="0" objectBoundingBox="true"><stop stop-color="#459CF5"/><stop offset=".46" stop-color="#53A7FF"/><stop offset=".83" stop-color="#4BA2F9"/><stop offset="1" stop-color="#489FF1"/></linearGradient>
+  <linearGradient id="white" x1="0" y1="0" x2="1" y2="1" objectBoundingBox="true"><stop stop-color="#F6F8FE"/><stop offset="1" stop-color="#EDF2FD"/></linearGradient>
+  <radialGradient id="ruby" cx=".32" cy=".21" r=".9"><stop stop-color="#FF6582"/><stop offset=".45" stop-color="#FA2E58"/><stop offset="1" stop-color="#DF0B40"/></radialGradient>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1" objectBoundingBox="true"><stop stop-color="#0B1427"/><stop offset=".5" stop-color="#0A101E"/><stop offset="1" stop-color="#0B1426"/></linearGradient>
+</defs><rect width="1024" height="1024" rx="205" fill="#090F1D"/><g transform="translate(512 512)">
+ <circle r="325.0" stroke="#237CDA" stroke-width="15" fill="none"/>
+ <circle r="208.0" stroke="#59B5FF" stroke-width="24" stroke-dasharray="265 92 130 155" transform="rotate(-32)" fill="none"/>
+ <circle r="158.6" stroke="#F3F7FF" stroke-width="28" stroke-dasharray="240 115 155 170" transform="rotate(22)" fill="none"/>
+ <circle r="135.20000000000002" fill="#071325"/>
+ <circle r="122.19999999999999" fill="url(#ruby)"/>
+ <ellipse cx="-36.400000000000006" cy="-46.8" rx="41.6" ry="26.0" fill="#FFA2B3" opacity=".45"/>
+ </g></svg>
