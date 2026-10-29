@@ -1,24 +1,27 @@
-# BlazeWorks — public portfolio
+# BlazeWorks — BlazeDevStudio website
 
-This repository contains the public static website for **BlazeWorks**, an independent software, electronics and technical portfolio hosted by BlazeDevStudio.
+A lightweight, static HTML/CSS/JavaScript portfolio for computers, electronics, networking and software.
 
-## Website sections
-- Homepage: BlazeWorks studio overview
-- Blaze Systems: software, embedded systems, electronics and networking
-- ManrealTech: computer repair and IT technical work
-- Blaze Labs: experiments and prototypes
-- Projects: selected GitHub repositories
-- About: studio overview
+**For manual editing:** [EDITING.md](docs/EDITING.md)  
+**For developers:** [ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
-## Hosting
+## Quick start
 
-**Cloudflare Pages:** `https://blazedevstudio.pages.dev/`
-- Source: `BlazeDevStudio/BlazeWeb`
-- Production branch: `main`
-- Framework: None (static HTML/CSS)
-- Build command: none
-- Build output: repository root (`.`)
+```bash
+python -m http.server 5500
+# Open http://localhost:5500/
+python scripts/check_site.py
+```
 
-**GitHub Pages:** `https://blazedevstudio.github.io/` requires a user site repository named `BlazeDevStudio.github.io`, or a separate redirect/setup; this repository by itself does not publish that root hostname.
+There is **no build system**, npm dependency or framework.
 
-Public project status descriptions are not claims of production readiness. This repository is separate from active development code.
+## Deployment sources
+
+| Hosting | Repository | How to update |
+| --- | --- | --- |
+| Cloudflare Pages | [BlazeWeb](https://github.com/BlazeDevStudio/BlazeWeb) | Commit and push `main`; check Cloudflare deployment |
+| GitHub Pages | [BlazeDevStudio.github.io](https://github.com/BlazeDevStudio/BlazeDevStudio.github.io) | Separately copy reviewed runtime changes, commit and push `main` |
+
+The repositories are deliberately separate. Changes to BlazeWeb do **not** automatically update GitHub Pages. The optional `scripts/sync_pages.py` tool copies runtime files between local clones without deleting, committing or pushing.
+
+All master brand assets remain in `assets/branding/v3/`. Project descriptions represent work in progress, not production-readiness claims.
