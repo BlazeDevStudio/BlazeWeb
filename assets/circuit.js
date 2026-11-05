@@ -20,7 +20,10 @@
   var width = 1, height = 1, scale = 1, nodes = [], running = false, frame = 0, last = 0;
   var mouse = { x: -1000, y: -1000, seen: -99999 };
   var isCoarse = window.matchMedia ? window.matchMedia("(pointer: coarse)").matches : false;
-  var fps = isCoarse ? 18 : 24, interval = 1000 / fps;
+  // Keep the existing desktop look; lower the cost on very low-end hardware.
+  var lowPower = (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
+    (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2);
+  var fps = lowPower ? 12 : (isCoarse ? 18 : 24), interval = 1000 / fps;
 
   function between(a, b) { return a + Math.random() * (b - a); }
   function resize() {
@@ -33,8 +36,10 @@
     canvas.width = Math.max(1, Math.round(w * scale));
     canvas.height = Math.max(1, Math.round(h * scale));
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
-    var count = Math.min(isCoarse ? 34 : 55, Math.max(isCoarse ? 21 : 27,
-      Math.round(w * h / (isCoarse ? 17500 : 22000))));
+    var count = lowPower
+      ? Math.min(26, Math.max(16, Math.round(w * h / 24000)))
+      : Math.min(isCoarse ? 34 : 55, Math.max(isCoarse ? 21 : 27,
+          Math.round(w * h / (isCoarse ? 17500 : 22000))));
     nodes = [];
     for (var i = 0; i < count; i++) {
       nodes.push({
@@ -42,6 +47,9 @@
         x: 0, y: 0, ox: 0, oy: 0, vx: between(-0.12, 0.12),
         vy: between(-0.12, 0.12), radius: between(1.1, 2.2)
       });
+      // Static/reduced-motion view should show the same distributed nodes.
+      nodes[i].x = nodes[i].bx;
+      nodes[i].y = nodes[i].by;
     }
     draw(false, 0);
   }
@@ -120,8 +128,16 @@
     mouse.x = x; mouse.y = y;
     mouse.seen = window.performance && window.performance.now ? window.performance.now() : 0;
   }
+  // Coalesce resize bursts to one layout update per animation frame.
+  var resizeQueued = false;
+  function scheduleResize() {
+    if (resizeQueued) return;
+    if (!raf) { resize(); return; }
+    resizeQueued = true;
+    raf(function () { resizeQueued = false; resize(); });
+  }
   resize();
-  window.addEventListener("resize", resize, false);
+  window.addEventListener("resize", scheduleResize, false);
   document.addEventListener("visibilitychange", check, false);
   if (window.PointerEvent) {
     window.addEventListener("pointermove", function (e) {
