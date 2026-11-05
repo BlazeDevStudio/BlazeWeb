@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LAYERS = ['00-foundation.css', '10-site-layout.css', '20-inner-pages.css', '30-responsive.css', '40-brand-and-effects.css', '50-about-resume.css']
 SOURCE = ROOT / "assets" / "css"
 OUTPUT = ROOT / "assets" / "site.min.css"
-BANNER = "/* Generated from assets/css/* by python scripts/build_assets.py; edit sources, not this file. */\\n"
+BANNER = "/* Generated from assets/css/* by python scripts/build_assets.py; edit sources, not this file. */\n"
 
 
 def minify_css(text):
@@ -32,7 +32,7 @@ def minify_css(text):
             output.append(char)
             if escaped:
                 escaped = False
-            elif char == "\\\\":
+            elif char == "\\":
                 escaped = True
             elif char == quote:
                 quote = ""
@@ -71,11 +71,11 @@ def minify_css(text):
 
     if quote:
         raise ValueError("Unterminated CSS string")
-    return re.sub(r";}", "}", "".join(output)) + "\\n"
+    return re.sub(r";}", "}", "".join(output)) + "\n"
 
 
 def build():
-    css = "\\n".join((SOURCE / filename).read_text(encoding="utf-8") for filename in LAYERS)
+    css = "\n".join((SOURCE / filename).read_text(encoding="utf-8") for filename in LAYERS)
     return BANNER + minify_css(css)
 
 
