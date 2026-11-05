@@ -5,6 +5,8 @@ from pathlib import Path
 from urllib.parse import urlsplit, unquote
 import sys
 
+from build_assets import build
+
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = [
     "index.html", "projects/index.html", "systems/index.html",
@@ -83,6 +85,18 @@ def main():
     for name in CSS_LAYERS:
         if not (ROOT / "assets" / "css" / name).is_file():
             errors.append("CSS layer missing: " + name)
+
+    bundle = ROOT / "assets" / "site.min.css"
+    if not bundle.is_file():
+        errors.append("Missing runtime CSS bundle: assets/site.min.css")
+    elif bundle.read_text(encoding="utf-8") != build():
+        errors.append("CSS bundle out of date: run python scripts/build_assets.py")
+
+    # All pages must use the single runtime stylesheet, not six import requests.
+    for rel in PAGES:
+        page = ROOT / rel
+        if page.is_file() and "site.min.css" not in page.read_text(encoding="utf-8"):
+            errors.append(rel + ": must load assets/site.min.css")
 
     if errors:
         print("Site check FAILED:")

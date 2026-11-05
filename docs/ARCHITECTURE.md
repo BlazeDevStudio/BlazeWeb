@@ -12,7 +12,8 @@ BlazeWeb/
 ├── about/index.html           Résumé-style About page
 ├── favicon.svg                Approved ruby HUD favicon
 ├── assets/
-│   ├── style.css              Ordered CSS entrypoint (do not reorder)
+│   ├── style.css              Readable CSS import fallback
+│   ├── site.min.css           Generated single-request runtime CSS
 │   ├── css/
 │   │   ├── 00-foundation.css      Colors, basic type, reset
 │   │   ├── 10-site-layout.css     Navigation, homepage, cards
@@ -26,7 +27,8 @@ BlazeWeb/
 ├── docs/EDITING.md            Manual editing and deployment instructions
 ├── docs/ARCHITECTURE.md       This map
 └── scripts/
-    ├── check_site.py          Verify local links and common HTML structure
+    ├── build_assets.py        Bundle CSS (Python only)
+    ├── check_site.py          Verify local links, HTML and bundle
     └── sync_pages.py          Copy website runtime to GitHub Pages clone
 ```
 
@@ -41,6 +43,6 @@ BlazeWeb/
 7. **About / print rules** — `50-`.
 8. **Optional behavior** — `assets/circuit.js`, run with `defer` on each page.
 
-The CSS modules are imported by `assets/style.css` in the same order as the previous single stylesheet. Do not move a rule between layers without checking its cascade priority. There are no remote fonts, CSS libraries, or required JavaScript frameworks.
+The CSS modules are still imported by the readable `assets/style.css` in their original cascade order, but live HTML pages now load the generated `assets/site.min.css` as **one render-blocking request instead of seven**. To preserve the original rule order, `python scripts/build_assets.py` concatenates and conservatively minifies the six CSS modules. Do not reorder layers without testing. No remote fonts, CSS libraries, or JavaScript frameworks are required.
 
-**One source, two hosts:** BlazeWeb is the Cloudflare source. The separately managed `BlazeDevStudio.github.io` repository hosts GitHub Pages. Neither hosting provider needs a build command. The GitHub Pages repository only needs runtime files; large brand archives stay in BlazeWeb and Drive.
+**One source, two hosts:** BlazeWeb is the Cloudflare source. The separately managed `BlazeDevStudio.github.io` repository hosts GitHub Pages. Hosting serves the committed `assets/site.min.css` directly; run the one-command Python CSS build *before* committing any stylesheet changes. The GitHub Pages repository only needs runtime files; large brand archives stay in BlazeWeb and Drive.

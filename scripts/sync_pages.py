@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = [
     "index.html", "projects/index.html", "systems/index.html",
     "labs/index.html", "manrealtech/index.html", "about/index.html",
-    "favicon.svg", "robots.txt", "assets/style.css", "assets/circuit.js",
+    "favicon.svg", "robots.txt", "assets/style.css", "assets/site.min.css", "assets/circuit.js",
 ]
 
 

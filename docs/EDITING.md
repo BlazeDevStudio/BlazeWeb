@@ -18,7 +18,7 @@ For Android, a plain-code editor such as **Acode** plus a Git client is sufficie
 3. Find the text or section you want. Press **Ctrl+Shift+F** (search across files). Open the matching HTML file.
 4. Edit page text *between* HTML tags. For layout/colors, open the appropriate CSS layer in `assets/css/`. For the moving nodes, open `assets/circuit.js`.
 5. In the repo folder, run `python -m http.server 5500` and visit `http://localhost:5500/` to preview. A Live Server extension is an alternative.
-6. Run `python scripts/check_site.py`. Inspect the website on a phone-width and a desktop-width viewport.
+6. After **any CSS layer change**, run `python scripts/build_assets.py` to rebuild the compact browser stylesheet. Then run `python scripts/check_site.py`. Inspect the website at phone and desktop widths.
 7. In GitHub Desktop, review the changed lines, **commit** and **push** to `BlazeWeb/main`. Cloudflare Pages will build from that branch; check deployment success.
 
 A quick typo can also be edited via GitHub's web file editor, but it is harder to see whether related layout or navigation files also need edits.
@@ -40,7 +40,7 @@ A quick typo can also be edited via GitHub's web file editor, but it is harder t
 | Node count, speed, cursor response | `assets/circuit.js` |
 | LCMXO640E diagram | `assets/diagrams/lcmxo640e-logic-architecture.svg` |
 
-`assets/style.css` is just an ordered list of `@import` statements. Avoid changing this unless you intentionally add or remove a CSS layer.
+`assets/style.css` is still the readable import-based fallback, but the live pages load the generated **`assets/site.min.css`** as one request. Edit files in `assets/css/`, then run `python scripts/build_assets.py` and commit the generated bundle together with your source edits. Do not edit `site.min.css` by hand.
 
 ### Example: edit the About page
 
@@ -60,9 +60,13 @@ Clone [BlazeDevStudio/BlazeDevStudio.github.io](https://github.com/BlazeDevStudi
 python scripts/sync_pages.py ../BlazeDevStudio.github.io
 ```
 
-The script copies the six pages, CSS layers, JavaScript, favicon and diagram files into the local GitHub Pages clone. It does not delete anything or push remotely. Open that second repo in GitHub Desktop, review its changes, commit and push `main`; then verify [blazedevstudio.github.io](https://blazedevstudio.github.io/).
+The script copies the six pages, CSS layers **and generated site.min.css**, JavaScript, favicon and diagram files into the local GitHub Pages clone. It does not delete anything or push remotely. Open that second repo in GitHub Desktop, review its changes, commit and push `main`; then verify [blazedevstudio.github.io](https://blazedevstudio.github.io/).
 
-If you edited the CSS or HTML directly in GitHub's browser, you can repeat the change in the second repository's browser editor instead.
+If you edit HTML directly in GitHub's browser, repeat the change in the second repository or use the local sync helper. For CSS edits, use a local clone to regenerate `assets/site.min.css`; changing a CSS layer without rebuilding will not change the live appearance. The CI site check rejects stale bundles.
+
+## Performance checks
+
+The performance changes and which popular recommendations do not apply are explained in [PERFORMANCE.md](PERFORMANCE.md). For actual timings, test in Chrome DevTools → Lighthouse or Network, ideally in mobile emulation and with an older Android/TV browser.
 
 ## Avoid accidental breakages
 

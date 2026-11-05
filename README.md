@@ -10,10 +10,11 @@ A lightweight, static HTML/CSS/JavaScript portfolio for computers, electronics, 
 ```bash
 python -m http.server 5500
 # Open http://localhost:5500/
+python scripts/build_assets.py     # after editing a CSS layer
 python scripts/check_site.py
 ```
 
-There is **no build system**, npm dependency or framework.
+There is **no framework or npm dependency**. The only optional preparation step is a standard-Python CSS bundler; both hosts serve the committed static files without running a build.
 
 ## Deployment sources
 

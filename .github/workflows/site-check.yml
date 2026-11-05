@@ -1,0 +1,22 @@
+name: Static website checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+      - name: Check generated CSS is current
+        run: python3 scripts/build_assets.py --check
+      - name: Check HTML links and CSS layers
+        run: python3 scripts/check_site.py
+      - name: Check JavaScript syntax
+        run: node --check assets/circuit.js
