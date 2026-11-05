@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090E18">
+<meta name="description" content="LM386 audio amplifier: 9 V bass-boost wiring, parts list, pin connections, and manufacturer-based internal architecture.">
+<title>LM386 amplifier schematic — BlazeWorks</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/site.min.css">
+<link rel="stylesheet" href="../../assets/diagrams/lm386-detail.css">
+<script src="../../assets/circuit.js" defer></script>
+</head>
+<body>
+<canvas id="circuit-field" class="circuit-field" aria-hidden="true"></canvas>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="container header-inner">
+<a class="wordmark" href="../../" aria-label="BlazeWorks home">blaze<span class="mark">/</span>works</a>
+<nav class="nav" aria-label="Main navigation"><a href="../../projects/">Work</a><a href="../../systems/">Systems</a><a href="../../manrealtech/">Repairs</a><a href="../../labs/">Lab</a><a href="../../about/">About</a></nav>
+</div></header>
+<main id="main" class="circuit-main container">
+<div class="circuit-crumb"><a href="../../">← Home</a> / Circuits / Figure 01</div>
+<section class="circuit-intro"><h1>LM386.</h1>
+<p>A real, low-voltage audio-amplifier circuit—documented against <strong>Texas Instruments SNAS545D</strong>.
+The external diagram follows the manufacturer's bass-boost application and adds clearly identified supply filtering.
+The internal view is a functional topology map; the exact transistor schematic is linked from TI.</p>
+<div class="circuit-specs"><div><b>9 V DC</b><small>single supply</small></div>
+<div><b>8 Ω</b><small>speaker load</small></div>
+<div><b>≈700 mW</b><small>LM386N-3, typical at 10% THD</small></div></div>
+</section>
+<section class="circuit-chapter" id="schematic">
+<div class="circuit-crumb">01 / EXTERNAL APPLICATION</div><h2>Wiring schematic.</h2>
+<p>Source circuit: TI datasheet <strong>Figure 9-9 (bass boost)</strong>.
+The 10 µF capacitor on bypass pin 7 and the 100 nF + 100 µF supply capacitors are the extra local decoupling shown here. The 9 V source and 8 Ω load are within the documented application range.</p>
+<figure class="circuit-visual">
+<a href="../../assets/diagrams/lm386-bass-boost-reference.svg" target="_blank" rel="noopener" aria-label="Open LM386 bass boost circuit as a full-resolution scalable schematic"><img src="../../assets/diagrams/lm386-bass-boost-reference.svg" width="1400" height="850" decoding="async" alt="Complete labeled LM386 bass boost circuit showing the 9V supply, decoupling capacitors, ten-kilohm volume potentiometer, pins one through eight, bypass and feedback networks, output Zobel RC, coupling capacitor polarity, and eight-ohm speaker"></a>
+<figcaption>Illustrated external wiring / TI-derived engineering drawing / click for unlimited SVG zoom.</figcaption>
+</figure>
+<div class="circuit-actions"><a href="../../assets/diagrams/lm386-bass-boost-reference.svg" target="_blank" rel="noopener">Open scalable circuit ↗</a><a href="https://www.ti.com/lit/ds/symlink/lm386.pdf#page=15" target="_blank" rel="noopener noreferrer">TI original figure 9-9 ↗</a></div>
+<div class="circuit-note warning"><strong>Not a 5 W amplifier.</strong> TI lists the LM386N-3 at a typical 700 mW with 9 V supply and an 8 Ω load at 10% total harmonic distortion. A speaker rated 5 W is compatible as a load when its impedance is 8 Ω, but the amplifier does not deliver 5 W.</div>
+</section>
+<section class="circuit-chapter" id="inside">
+<div class="circuit-crumb">02 / INTERNAL TOPOLOGY</div><h2>Inside the LM386.</h2>
+<p>Documented groups include the 50 kΩ input bias paths, the 15 kΩ bias chain, 150 Ω and 1.35 kΩ gain-setting resistors, bipolar transistor input and driver stages, output bias diodes, and class-AB output stage. The map explains their roles; it is <strong>not</strong> a replacement for TI's complete transistor-level schematic on page 1.</p>
+<figure class="circuit-visual">
+<a href="../../assets/diagrams/lm386-internal-functional.svg" target="_blank" rel="noopener"><img src="../../assets/diagrams/lm386-internal-functional.svg" width="1400" height="815" loading="lazy" decoding="async" alt="Internal topology map with input transistor pair, resistor gain and bias circuitry, driver and class AB output stages, and actual resistor values from the manufacturer"></a>
+<figcaption>Functional illustration derived from manufacturer documentation; internal transistor connections are not intended as a build netlist.</figcaption></figure>
+<div class="circuit-actions"><a href="https://www.ti.com/lit/ds/symlink/lm386.pdf#page=1" target="_blank" rel="noopener noreferrer">TI's exact internal transistor schematic (page 1) ↗</a></div>
+</section>
+<section class="circuit-chapter" id="parts"><div class="circuit-crumb">03 / BILL OF MATERIALS</div>
+<h2>Components and connections.</h2>
+<p>The values listed below match the displayed external schematic. Use a suitably rated regulated 9 V DC supply; the grounding symbols indicate one common return.</p>
+<div class="circuit-table-wrap"><table class="circuit-table">
+<thead><tr><th>Ref</th><th>Value / part</th><th>Connection / function</th></tr></thead><tbody>
+<tr><td>U1</td><td>LM386N-3 or compatible 9 V LM386 variant</td><td>Pin 6 to +9 V; pins 2, 4 to GND; pin 8 open.</td></tr>
+<tr><td>RV1</td><td>10 kΩ potentiometer</td><td>Audio input to high terminal; low to GND; wiper to pin 3 (+IN).</td></tr>
+<tr><td>C1</td><td>250 µF electrolytic, ≥16 V</td><td>Series output coupling: positive terminal toward pin 5, negative toward 8 Ω speaker.</td></tr>
+<tr><td>C2 + R1</td><td>50 nF capacitor + 10 Ω resistor</td><td>Series Zobel network: output pin 5 to ground. Neither part is directly across the speaker.</td></tr>
+<tr><td>C3 + R2</td><td>33 nF capacitor + 10 kΩ resistor</td><td>Series bass-feedback RC from pin 1 to pin 5, before C1. Pin 8 remains open.</td></tr>
+<tr><td>C5</td><td>10 µF electrolytic, ≥16 V</td><td>Bypass from pin 7 (+) to ground (−); noise reduction.</td></tr>
+<tr><td>C6</td><td>100 nF ceramic, ≥16 V</td><td>Local +9 V to GND bypass at pin 6; engineering addition.</td></tr>
+<tr><td>C7</td><td>100 µF electrolytic, ≥16 V</td><td>Additional +9 V to GND bulk decoupling; positive to +9 V.</td></tr>
+<tr><td>LS1</td><td>8 Ω speaker, 1 W or higher rating</td><td>After the output capacitor to ground. A 5 W-rated speaker is also suitable.</td></tr>
+</tbody></table></div>
+<div class="circuit-note"><strong>Polarity &amp; assembly:</strong> Keep the supply decoupling close to U1. Observe capacitor polarities and confirm ground continuity before powering. If the audio source carries DC offset, add suitable input AC coupling. Power off before changing wiring. Crossed conductors without junction dots are independent.</div>
+</section>
+<section class="circuit-chapter" id="references"><div class="circuit-crumb">04 / SOURCE AND LIMITS</div>
+<h2>Datasheet references.</h2>
+<p class="circuit-references"><a href="https://www.ti.com/lit/ds/symlink/lm386.pdf" target="_blank" rel="noopener noreferrer">Texas Instruments, LM386 Low Voltage Audio Power Amplifier, SNAS545D (2023)</a>.
+See page 1 for the real internal transistor schematic, page 5 for measured output-power ratings, page 10 for gain and bass-feedback theory, page 15 for Figure 9-9, and page 17 for supply-decoupling guidance.</p>
+<p class="circuit-references">The SVG is an original re-drawing of the external application connectivity with documented additions. It has been reviewed for component/pin consistency but not physically built, simulated, or tested. Do not treat the internal topology illustration as an electrical wiring schematic.</p></section>
+</main><footer class="site-footer"><div class="container footer-inner"><small>© 2026 BlazeDevStudio</small><a href="../../">Return to BlazeWorks ↗</a></div></footer>
+</body></html>
